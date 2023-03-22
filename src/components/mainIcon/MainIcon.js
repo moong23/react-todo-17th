@@ -1,6 +1,3 @@
-import { useRecoilState } from "recoil";
-import { clickedIconState } from "../../states/atoms";
-
 import icon_main from "../../assets/icon_main.png";
 import icon_text from "../../assets/icon_text.png";
 
@@ -11,9 +8,7 @@ import {
   MainIconSubText,
 } from "./MainIcon.element";
 
-const MainIcon = ({ name, position }) => {
-  const [clickedIcon, setClickedIcon] = useRecoilState(clickedIconState);
-
+const MainIcon = ({ name, position, clickedIcon }) => {
   const RenderIcon = ({ iconSrc }) => {
     return (
       <MainIconContainer position={position}>

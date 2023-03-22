@@ -4,7 +4,7 @@ export const MainIconContainer = styled.div`
   width: 76px;
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   top: ${(props) => `${props.position.top}px`};
   left: ${(props) => `${props.position.left}px`};
   align-items: center;

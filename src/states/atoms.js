@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const mainIconPositionState = atom({
   key: "mainIconPositionState",
-  default: {
+  default: JSON.parse(localStorage.getItem("mainIconPosition")) ?? {
     top: 30,
     left: 30,
   },
@@ -10,7 +10,7 @@ export const mainIconPositionState = atom({
 
 export const textIconPositionState = atom({
   key: "textIconPositionState",
-  default: {
+  default: JSON.parse(localStorage.getItem("textIconPosition")) ?? {
     top: 150,
     left: 30,
   },

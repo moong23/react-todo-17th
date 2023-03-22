@@ -1,7 +1,9 @@
 import React from "react";
 import * as ReactDOM from "react-dom/client";
 import App from "./App";
-import "./reset.css";
+import "./styles/reset.css";
+import "./styles/colors.css";
+import { RecoilRoot } from "recoil";
 
 // ReactDOM.render(
 //   // <React.StrictMode>
@@ -11,4 +13,8 @@ import "./reset.css";
 // );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <RecoilRoot>
+    <App />
+  </RecoilRoot>
+);

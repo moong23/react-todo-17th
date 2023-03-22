@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 
 import MainIcon from "../../components/mainIcon/MainIcon";
@@ -5,52 +6,91 @@ import MainIcon from "../../components/mainIcon/MainIcon";
 import {
   mainIconPositionState,
   textIconPositionState,
-  clickedIconState,
 } from "../../states/atoms";
 import background_image from "../../assets/background_image.jpg";
 import { MainpageContainer } from "./Mainpage.element";
+import Card from "../../components/card/Card";
 
-const Mainpage = () => {
+const Mainpage = ({ clickedIcon, setClickedIcon }) => {
   const [mainIconPosition, setMainIconPosition] = useRecoilState(
     mainIconPositionState
   );
   const [textIconPosition, setTextIconPosition] = useRecoilState(
     textIconPositionState
   );
-  const [clickedIcon, setClickedIcon] = useRecoilState(clickedIconState);
+
+  const [mainRender, setMainRender] = useState(false);
+  const [textRender, setTextRender] = useState(false);
+  const resetClickedIcon = () => setClickedIcon("");
 
   const onClickHandler = (e) => {
-    // 클릭한 위치가 메인 아이콘의 위치 안에 있는 경우
-    if (
-      e.pageX > mainIconPosition.left &&
-      e.pageX < mainIconPosition.left + 76 &&
-      e.pageY > mainIconPosition.top &&
-      e.pageY < mainIconPosition.top + 100
-    ) {
-      if (clickedIcon === "main") {
-        setClickedIcon("");
+    // 클릭 한번 한 경우
+    if (e.detail === 1) {
+      // 클릭한 위치가 아이콘의 위치 안에 있는 경우
+      // 아이콘 클릭 state토글
+      // 아이콘 위치 밖 클릭 -> clickedIcon state 초기화
+      if (
+        e.pageX > mainIconPosition.left &&
+        e.pageX < mainIconPosition.left + 76 &&
+        e.pageY > mainIconPosition.top &&
+        e.pageY < mainIconPosition.top + 100
+      ) {
+        if (clickedIcon === "main") {
+          resetClickedIcon();
+        } else {
+          setClickedIcon("main");
+        }
+      } else if (
+        e.pageX > textIconPosition.left &&
+        e.pageX < textIconPosition.left + 76 &&
+        e.pageY > textIconPosition.top &&
+        e.pageY < textIconPosition.top + 100
+      ) {
+        if (clickedIcon === "text") {
+          resetClickedIcon();
+        } else {
+          setClickedIcon("text");
+        }
       } else {
-        setClickedIcon("main");
-      }
-    } else if (
-      e.pageX > textIconPosition.left &&
-      e.pageX < textIconPosition.left + 76 &&
-      e.pageY > textIconPosition.top &&
-      e.pageY < textIconPosition.top + 100
-    ) {
-      if (clickedIcon === "text") {
-        setClickedIcon("");
-      } else {
-        setClickedIcon("text");
+        resetClickedIcon();
       }
     } else {
-      setClickedIcon("");
+      // 더블 클릭한 경우 -> page open
+      if (
+        e.pageX > mainIconPosition.left &&
+        e.pageX < mainIconPosition.left + 76 &&
+        e.pageY > mainIconPosition.top &&
+        e.pageY < mainIconPosition.top + 100
+      ) {
+        // setMainRender(true);
+        setMainRender(!mainRender);
+      } else if (
+        e.pageX > textIconPosition.left &&
+        e.pageX < textIconPosition.left + 76 &&
+        e.pageY > textIconPosition.top &&
+        e.pageY < textIconPosition.top + 100
+      ) {
+        setMainRender(true);
+      }
     }
   };
+  // onClickHandler 끝
+
+  // TODO: react-draggable로 아이콘 위치 변경
+  // -> position을 draggable 조건에 맞게 변경해야할듯
   return (
     <MainpageContainer src={background_image} onClick={onClickHandler}>
-      <MainIcon name="main" position={mainIconPosition} />
-      <MainIcon name="text" position={textIconPosition} />
+      <MainIcon
+        name="main"
+        position={mainIconPosition}
+        clickedIcon={clickedIcon}
+      />
+      <MainIcon
+        name="text"
+        position={textIconPosition}
+        clickedIcon={clickedIcon}
+      />
+      <Card render={mainRender} setRender={setMainRender} />
     </MainpageContainer>
   );
 };
