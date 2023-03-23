@@ -70,7 +70,7 @@ const Mainpage = ({ clickedIcon, setClickedIcon }) => {
         e.pageY > textIconPosition.top &&
         e.pageY < textIconPosition.top + 100
       ) {
-        setMainRender(true);
+        console.log("text Icon");
       }
     }
   };

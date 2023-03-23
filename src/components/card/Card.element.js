@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
   width: max(300px, 30vw);
-  height: max-content(480px, 48vw);
+  height: max(480px, 48vw);
   margin: 0 auto;
   background-color: #1e1e1e;
   border-radius: 12px;
@@ -19,20 +19,6 @@ export const CardToolBar = styled.div`
   border-radius: 12px 12px 0 0;
   box-sizing: border-box;
   position: relative;
-`;
-
-export const CardCircle = styled.div`
-  display: inline-block;
-  margin: 0 4px;
-  align-items: center;
-  width: 10px;
-  height: 10px;
-  padding: 1px;
-  border-radius: 50%;
-  background-color: ${(props) => `var(--${props.color}-button)`};
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 export const CardPlusBtn = styled.div`
@@ -53,4 +39,14 @@ export const CardPlusBtn = styled.div`
   &::before {
     content: "+";
   }
+`;
+
+export const CardMainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 40px);
+  border-radius: 0 0 12px 12px;
+  position: relative;
 `;
