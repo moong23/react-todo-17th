@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import CircleBtn from "../circleBtn/CircleBtn";
 
 import HoverDiv from "../hoverDiv/HoverDiv";
@@ -18,9 +18,6 @@ const Card = ({ render, setRender }) => {
   return (
     <CardContainer display={render.toString()}>
       <CardToolBar>
-        {/* <CardCircle color="red" onClick={() => setRender(!render)} />
-        <CardCircle color="yellow" />
-        <CardCircle color="green" /> */}
         <CircleBtn
           color="red"
           type="button"
@@ -29,7 +26,7 @@ const Card = ({ render, setRender }) => {
         />
         <CircleBtn color="yellow" type="button" />
         <CircleBtn color="green" type="button" />
-        <CardPlusBtn onClick={() => setHoverDivRender(true)} />
+        <CardPlusBtn onClick={() => setHoverDivRender(!hoverDivRender)} />
       </CardToolBar>
       <CardMainDiv>
         <HoverDiv

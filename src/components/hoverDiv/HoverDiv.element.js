@@ -1,9 +1,17 @@
-import styled from "styled-components";
-
+import styled, { keyframes } from "styled-components";
+const slideIn = keyframes`
+    from {
+        transform: translateY(-10%);
+    }
+    to {
+        transform: translateY(0);
+    }
+`;
 export const HoverDivContainer = styled.form`
   position: absolute;
   visibility: ${(props) =>
     props.hoverDivRender === true ? "visible" : "hidden"};
+  opacity: ${(props) => (props.hoverDivRender === true ? 1 : 0)};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -17,14 +25,13 @@ export const HoverDivContainer = styled.form`
   border-radius: 8px;
   background-color: #18181a;
   color: white;
-  opacity: 1;
   justify-content: space-evenly;
-  /* transition: 0.5s; */
-  /* animation: slideIn 0.1s; */
+  transition: opacity 0.3s ease-in-out;
+  animation: ${slideIn} 0.3s;
 `;
 
 export const HoverTitle = styled.h1`
-  font-size: 24px;
+  font-size: max(24px, 3vw);
   font-weight: 500;
   font-style: italic;
   margin-bottom: 8px;
@@ -32,7 +39,7 @@ export const HoverTitle = styled.h1`
 
 export const HoverInput = styled.input`
   width: 80%;
-  height: 28px;
+  height: max(28px, 2.5vw);
   border-radius: 4px;
   box-sizing: border-box;
   border: none;
@@ -40,24 +47,28 @@ export const HoverInput = styled.input`
   color: white;
   box-shadow: inset -1px -1px 2px 0px #656565;
   background-color: #2c2830;
+  font-size: max(12px, 1.2vw);
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const HoverTagDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 60%;
+  width: 75%;
   justify-content: space-between;
 `;
 
 export const HoverButton = styled.button`
   width: 40%;
-  height: 24px;
+  height: max(24px, 2.2vw);
   border: none;
   border-radius: 4px;
   background-color: #2c2830;
   box-shadow: inset -1px -1px 2px 0px #656565;
   color: white;
-  font-size: 12px;
+  font-size: max(12px, 1.2vw);
   font-weight: 500;
   margin-top: 8px;
   cursor: pointer;
