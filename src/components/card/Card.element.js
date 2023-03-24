@@ -33,8 +33,9 @@ export const CardPlusBtn = styled.div`
   right: 12px;
   padding: 2px;
   &:hover {
-    cursor: pointer;
     background-color: #656565;
+    cursor: url(Link.cur) 0 0, pointer;
+    /* cursor: url(../../assets/Link.cur) 0 0, pointer; */
   }
   &::before {
     content: "+";
@@ -49,4 +50,27 @@ export const CardMainDiv = styled.div`
   height: calc(100% - 40px);
   border-radius: 0 0 12px 12px;
   position: relative;
+`;
+
+export const CardTodoText = styled.h1`
+  color: white;
+  font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 8px 0 0 12px;
+`;
+
+export const CardTodoDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  flex-direction: row;
+  justify-content: center;
+  overflow-y: auto;
+  position: relative;
+  align-content: flex-start;
+  overflow-x: hidden;
 `;

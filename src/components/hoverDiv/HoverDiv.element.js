@@ -28,6 +28,7 @@ export const HoverDivContainer = styled.form`
   justify-content: space-evenly;
   transition: opacity 0.3s ease-in-out;
   animation: ${slideIn} 0.3s;
+  z-index: 10;
 `;
 
 export const HoverTitle = styled.h1`
@@ -51,6 +52,9 @@ export const HoverInput = styled.input`
   &:focus {
     outline: none;
   }
+  &:hover {
+    cursor: url(Text.cur) 0 0, text;
+  }
 `;
 
 export const HoverTagDiv = styled.div`
@@ -71,5 +75,5 @@ export const HoverButton = styled.button`
   font-size: max(12px, 1.2vw);
   font-weight: 500;
   margin-top: 8px;
-  cursor: pointer;
+  cursor: url(Link.cur) 0 0, pointer;
 `;

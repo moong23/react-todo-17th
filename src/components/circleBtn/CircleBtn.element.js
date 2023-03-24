@@ -10,7 +10,7 @@ export const CardCircle = styled.div`
   border-radius: 50%;
   background-color: ${(props) => `var(--${props.color}-${props.type})`};
   &:hover {
-    cursor: pointer;
+    cursor: url(Link.cur) 0 0, pointer;
   }
 `;
 
@@ -25,7 +25,7 @@ export const InputCircle = styled.input`
   border-radius: 50%;
   background-color: ${(props) => `var(--${props.color}-${props._type})`};
   &:hover {
-    cursor: pointer;
+    cursor: url(Link.cur) 0 0, pointer;
   }
   border: ${(props) =>
     props.selectedTag === props.value ? "1px solid white" : "none"};

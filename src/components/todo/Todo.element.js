@@ -30,4 +30,5 @@ export const TodoTime = styled.div`
   font-size: 14px;
   align-self: flex-end;
   font-weight: 600;
+  color: ${(props) => `var(--${props.tag}-tag)`};
 `;
