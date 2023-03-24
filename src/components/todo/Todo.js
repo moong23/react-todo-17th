@@ -123,7 +123,7 @@ const Todo = ({ id, content, tag, done, setAllList }) => {
       }
     }
   };
-  if (tag !== -1) {
+  if (tag !== -1 && tag !== -2) {
     return (
       <TodoContainer
         toggleleft={toggleLeft}
@@ -138,7 +138,7 @@ const Todo = ({ id, content, tag, done, setAllList }) => {
       </TodoContainer>
     );
   } else {
-    if (!done) {
+    if (tag === -1) {
       return (
         <TodoContainer>
           <TodoTitle ref={todoTitleDiv}>PRESS + ON THE TOP BAR</TodoTitle>

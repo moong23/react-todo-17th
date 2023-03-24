@@ -84,7 +84,7 @@ const Card = ({ render, setRender }) => {
                   />
                 );
               })}
-            {doneList.length === 0 && <Todo tag={-1} />}
+            {doneList.length === 0 && <Todo tag={-2} />}
           </CardTodoDiv>
         </NotHoverDiv>
       </CardMainDiv>
