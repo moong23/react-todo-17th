@@ -18,12 +18,13 @@ const Card = ({ render, setRender }) => {
   }, [render]);
   const [hoverDivRender, setHoverDivRender] = useState(false);
 
-  const getItem = (query) => {
-    return JSON.parse(localStorage.getItem("todoList")) || [];
-  };
-  const allList = useMemo(() => getItem(), [hoverDivRender]);
-  const todoList = allList.filter((item) => item.done === false);
+  const [allList, setAllList] = useState([]);
+  const todoList = allList ? allList.filter((item) => item.done === false) : [];
+  const doneList = allList ? allList.filter((item) => item.done === true) : [];
 
+  useEffect(() => {
+    setAllList(JSON.parse(localStorage.getItem("todoList")) || []);
+  }, [hoverDivRender]);
   return (
     <CardContainer display={render.toString()}>
       <CardToolBar>
@@ -42,19 +43,41 @@ const Card = ({ render, setRender }) => {
           hoverDivRender={hoverDivRender && render}
           setHoverDivRender={setHoverDivRender}
         />
+        <CardTodoText>TODO [{todoList.length}개]</CardTodoText>
         <CardTodoDiv>
-          <CardTodoText>TODO [{todoList.length}개]</CardTodoText>
-          {todoList.map((item) => {
-            return (
-              <Todo
-                key={item.id}
-                id={item.id}
-                content={item.content}
-                tag={item.tag}
-                done={item.done}
-              />
-            );
-          })}
+          {todoList.length > 0 &&
+            todoList.map((item) => {
+              return (
+                <Todo
+                  key={item.id}
+                  id={item.id}
+                  content={item.content}
+                  tag={item.tag}
+                  done={item.done}
+                  setAllList={setAllList}
+                  allList={allList}
+                />
+              );
+            })}
+          {todoList.length === 0 && <Todo tag={-1} />}
+        </CardTodoDiv>
+        <CardTodoText>DONE [{doneList.length}개]</CardTodoText>
+        <CardTodoDiv>
+          {doneList.length > 0 &&
+            doneList.map((item) => {
+              return (
+                <Todo
+                  key={item.id}
+                  id={item.id}
+                  content={item.content}
+                  tag={item.tag}
+                  done={item.done}
+                  setAllList={setAllList}
+                  allList={allList}
+                />
+              );
+            })}
+          {doneList.length === 0 && <Todo tag={-1} />}
         </CardTodoDiv>
       </CardMainDiv>
     </CardContainer>

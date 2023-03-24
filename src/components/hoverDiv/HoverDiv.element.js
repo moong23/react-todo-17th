@@ -12,6 +12,8 @@ export const HoverDivContainer = styled.form`
   visibility: ${(props) =>
     props.hoverDivRender === true ? "visible" : "hidden"};
   opacity: ${(props) => (props.hoverDivRender === true ? 1 : 0)};
+  transform: ${(props) =>
+    props.hoverDivRender === true ? "translateY(0)" : "translateY(-10%)"};
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -27,6 +29,7 @@ export const HoverDivContainer = styled.form`
   color: white;
   justify-content: space-evenly;
   transition: opacity 0.3s ease-in-out;
+  transition: transform 0.3s ease-out;
   animation: ${slideIn} 0.3s;
   z-index: 10;
 `;

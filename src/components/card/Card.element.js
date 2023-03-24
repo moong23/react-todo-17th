@@ -8,6 +8,7 @@ export const CardContainer = styled.div`
   border-radius: 12px;
   z-index: 2;
   visibility: ${(props) => (props.display === "true" ? "visible" : "hidden")};
+  box-shadow: 0 0 10px 0px #000000;
 `;
 
 export const CardToolBar = styled.div`
@@ -61,6 +62,7 @@ export const CardTodoText = styled.h1`
   text-align: left;
   box-sizing: border-box;
   padding: 8px 0 0 12px;
+  margin-bottom: 8px;
 `;
 
 export const CardTodoDiv = styled.div`
@@ -73,4 +75,5 @@ export const CardTodoDiv = styled.div`
   position: relative;
   align-content: flex-start;
   overflow-x: hidden;
+  width: 100%;
 `;

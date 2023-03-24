@@ -12,6 +12,13 @@ export const TodoContainer = styled.div`
   color: #aeaeae;
   box-sizing: border-box;
   padding: 10px;
+  transform: ${(props) =>
+    props.toggleleft
+      ? "translateX(-20%)"
+      : props.toggleright
+      ? "translateX(20%)"
+      : "translateX(0)"};
+  transition: transform 0.3s;
 `;
 
 export const TodoTitle = styled.div`
