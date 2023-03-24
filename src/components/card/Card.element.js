@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  width: max(300px, 30vw);
-  height: max(480px, 48vw);
+  width: ${(props) => (props.display ? "max(300px, 30vw)" : "0")};
+  height: ${(props) => (props.display ? "max(500px, 50vw)" : "0")};
+  position: ${(props) => (props.display ? "initial" : "fixed")};
+  top: ${(props) => props.position.top};
+  left: ${(props) => props.position.left};
   margin: 0 auto;
   background-color: #1e1e1e;
   border-radius: 12px;
   z-index: 2;
-  visibility: ${(props) => (props.display === "true" ? "visible" : "hidden")};
+  visibility: ${(props) => (props.display ? "visible" : "hidden")};
   box-shadow: 0 0 10px 0px #000000;
+  transition: width 0.2s, height 0.2s, visibility 0.05s linear 0.15s;
 `;
 
 export const CardToolBar = styled.div`
@@ -20,6 +24,7 @@ export const CardToolBar = styled.div`
   border-radius: 12px 12px 0 0;
   box-sizing: border-box;
   position: relative;
+  visibility: ${(props) => (props.display ? "visible" : "hidden")};
 `;
 
 export const CardPlusBtn = styled.div`
@@ -41,6 +46,14 @@ export const CardPlusBtn = styled.div`
   &::before {
     content: "+";
   }
+`;
+
+export const NotHoverDiv = styled.div`
+  opacity: ${(props) => (props.hoverRender ? 0 : 1)};
+  display: ${(props) => (props.render ? "flex" : "none")};
+  flex-direction: column;
+  height: 100%;
+  transition: opacity 0.1s;
 `;
 
 export const CardMainDiv = styled.div`

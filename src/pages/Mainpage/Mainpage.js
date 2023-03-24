@@ -1,23 +1,30 @@
-import { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
 import MainIcon from "../../components/mainIcon/MainIcon";
 
-import {
-  mainIconPositionState,
-  textIconPositionState,
-} from "../../states/atoms";
 import background_image from "../../assets/background_image.jpg";
 import { MainpageContainer } from "./Mainpage.element";
 import Card from "../../components/card/Card";
 
 const Mainpage = ({ clickedIcon, setClickedIcon }) => {
-  const [mainIconPosition, setMainIconPosition] = useRecoilState(
-    mainIconPositionState
-  );
-  const [textIconPosition, setTextIconPosition] = useRecoilState(
-    textIconPositionState
-  );
+  const [mainIconPosition, setMainIconPosition] = useState({
+    top: 30,
+    left: 30,
+  });
+  const [textIconPosition, setTextIconPosition] = useState({
+    top: 160,
+    left: 30,
+  });
+  useEffect(() => {
+    setMainIconPosition({
+      top: 30,
+      left: 30,
+    });
+    setTextIconPosition({
+      top: 30,
+      left: 30,
+    });
+  }, []);
 
   const [mainRender, setMainRender] = useState(false);
   const [textRender, setTextRender] = useState(false);
@@ -70,7 +77,8 @@ const Mainpage = ({ clickedIcon, setClickedIcon }) => {
         e.pageY > textIconPosition.top &&
         e.pageY < textIconPosition.top + 100
       ) {
-        console.log("text Icon");
+        setTextRender(!textRender);
+        alert("WIP");
       }
     }
   };

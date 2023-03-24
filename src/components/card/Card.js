@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import CircleBtn from "../circleBtn/CircleBtn";
 
 import HoverDiv from "../hoverDiv/HoverDiv";
@@ -10,6 +10,7 @@ import {
   CardMainDiv,
   CardTodoDiv,
   CardTodoText,
+  NotHoverDiv,
 } from "./Card.element";
 
 const Card = ({ render, setRender }) => {
@@ -26,8 +27,14 @@ const Card = ({ render, setRender }) => {
     setAllList(JSON.parse(localStorage.getItem("todoList")) || []);
   }, [hoverDivRender]);
   return (
-    <CardContainer display={render.toString()}>
-      <CardToolBar>
+    <CardContainer
+      display={render}
+      position={{
+        top: "50px",
+        left: "50px",
+      }}
+    >
+      <CardToolBar display={render}>
         <CircleBtn
           color="red"
           type="button"
@@ -43,42 +50,43 @@ const Card = ({ render, setRender }) => {
           hoverDivRender={hoverDivRender && render}
           setHoverDivRender={setHoverDivRender}
         />
-        <CardTodoText>TODO [{todoList.length}개]</CardTodoText>
-        <CardTodoDiv>
-          {todoList.length > 0 &&
-            todoList.map((item) => {
-              return (
-                <Todo
-                  key={item.id}
-                  id={item.id}
-                  content={item.content}
-                  tag={item.tag}
-                  done={item.done}
-                  setAllList={setAllList}
-                  allList={allList}
-                />
-              );
-            })}
-          {todoList.length === 0 && <Todo tag={-1} />}
-        </CardTodoDiv>
-        <CardTodoText>DONE [{doneList.length}개]</CardTodoText>
-        <CardTodoDiv>
-          {doneList.length > 0 &&
-            doneList.map((item) => {
-              return (
-                <Todo
-                  key={item.id}
-                  id={item.id}
-                  content={item.content}
-                  tag={item.tag}
-                  done={item.done}
-                  setAllList={setAllList}
-                  allList={allList}
-                />
-              );
-            })}
-          {doneList.length === 0 && <Todo tag={-1} />}
-        </CardTodoDiv>
+        <NotHoverDiv render={render} hoverRender={hoverDivRender}>
+          <CardTodoText>TODO [{todoList.length}개]</CardTodoText>
+          <CardTodoDiv>
+            {todoList.length > 0 &&
+              todoList.map((item) => {
+                return (
+                  <Todo
+                    key={item.id}
+                    id={item.id}
+                    content={item.content}
+                    tag={item.tag}
+                    done={item.done}
+                    setAllList={setAllList}
+                    allList={allList}
+                  />
+                );
+              })}
+            {todoList.length === 0 && <Todo tag={-1} />}
+          </CardTodoDiv>
+          <CardTodoText>DONE [{doneList.length}개]</CardTodoText>
+          <CardTodoDiv>
+            {doneList.length > 0 &&
+              doneList.map((item) => {
+                return (
+                  <Todo
+                    key={item.id}
+                    id={item.id}
+                    content={item.content}
+                    tag={item.tag}
+                    done={item.done}
+                    setAllList={setAllList}
+                  />
+                );
+              })}
+            {doneList.length === 0 && <Todo tag={-1} />}
+          </CardTodoDiv>
+        </NotHoverDiv>
       </CardMainDiv>
     </CardContainer>
   );

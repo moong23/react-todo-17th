@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { TodoContainer, TodoTime, TodoTitle } from "./Todo.element";
 
-const Todo = ({ id, content, tag, done, setAllList, allList }) => {
+const Todo = ({ id, content, tag, done, setAllList }) => {
   const [toggleLeft, setToggleLeft] = useState(false);
   const [toggleRight, setToggleRight] = useState(false);
   const [timeString, setTimeString] = useState("");
@@ -138,11 +138,27 @@ const Todo = ({ id, content, tag, done, setAllList, allList }) => {
       </TodoContainer>
     );
   } else {
-    return (
-      <TodoContainer>
-        <TodoTitle ref={todoTitleDiv}>할 일이 없습니다.</TodoTitle>
-      </TodoContainer>
-    );
+    if (!done) {
+      return (
+        <TodoContainer>
+          <TodoTitle ref={todoTitleDiv}>PRESS + ON THE TOP BAR</TodoTitle>
+          <TodoTime tag={"red"}>to add todo</TodoTime>
+        </TodoContainer>
+      );
+    } else {
+      return (
+        <>
+          <TodoContainer>
+            <TodoTitle ref={todoTitleDiv}>CLICK LEFT TWICE</TodoTitle>
+            <TodoTime tag={"red"}>to delete todo</TodoTime>
+          </TodoContainer>
+          <TodoContainer>
+            <TodoTitle ref={todoTitleDiv}>CLICK RIGHT TWICE</TodoTitle>
+            <TodoTime tag={"green"}>to complete todo</TodoTime>
+          </TodoContainer>
+        </>
+      );
+    }
   }
 };
 
