@@ -11,7 +11,7 @@ export const mainIconPositionState = atom({
 export const textIconPositionState = atom({
   key: "textIconPositionState",
   default: JSON.parse(localStorage.getItem("textIconPosition")) ?? {
-    top: 150,
+    top: 160,
     left: 30,
   },
 });

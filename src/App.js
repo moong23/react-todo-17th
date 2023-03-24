@@ -11,7 +11,7 @@ function App() {
   );
   const [textIconPosition, setTextIconPosition] = useState(
     JSON.parse(localStorage.getItem("textIconPosition")) ?? {
-      top: 150,
+      top: 160,
       left: 30,
     }
   );
