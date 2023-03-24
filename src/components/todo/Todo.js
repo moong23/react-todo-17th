@@ -50,8 +50,11 @@ const Todo = ({ id, content, tag, done, setAllList, allList }) => {
         setAllList(currentTodo);
         // toggle 안되어 있으면 state 초기화 후 오른쪽으로 toggle
       } else {
-        setToggleLeft(false);
-        setToggleRight(true);
+        if (toggleLeft) {
+          setToggleLeft(false);
+        } else {
+          setToggleRight(true);
+        }
       }
     }
     // 제목 클릭한 경우
