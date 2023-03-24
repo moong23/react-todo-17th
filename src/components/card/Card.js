@@ -2,11 +2,14 @@ import { useEffect, useState, useMemo } from "react";
 import CircleBtn from "../circleBtn/CircleBtn";
 
 import HoverDiv from "../hoverDiv/HoverDiv";
+import Todo from "../todo/Todo";
 import {
   CardContainer,
   CardToolBar,
   CardPlusBtn,
   CardMainDiv,
+  CardTodoDiv,
+  CardTodoText,
 } from "./Card.element";
 
 const Card = ({ render, setRender }) => {
@@ -14,6 +17,12 @@ const Card = ({ render, setRender }) => {
     setHoverDivRender(false);
   }, [render]);
   const [hoverDivRender, setHoverDivRender] = useState(false);
+
+  const getItem = (query) => {
+    return JSON.parse(localStorage.getItem("todoList")) || [];
+  };
+  const allList = useMemo(() => getItem(), [hoverDivRender]);
+  const todoList = allList.filter((item) => item.done === false);
 
   return (
     <CardContainer display={render.toString()}>
@@ -33,6 +42,20 @@ const Card = ({ render, setRender }) => {
           hoverDivRender={hoverDivRender && render}
           setHoverDivRender={setHoverDivRender}
         />
+        <CardTodoDiv>
+          <CardTodoText>TODO [{todoList.length}개]</CardTodoText>
+          {todoList.map((item) => {
+            return (
+              <Todo
+                key={item.id}
+                id={item.id}
+                content={item.content}
+                tag={item.tag}
+                done={item.done}
+              />
+            );
+          })}
+        </CardTodoDiv>
       </CardMainDiv>
     </CardContainer>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CircleBtn from "../circleBtn/CircleBtn";
 import {
   HoverButton,
@@ -12,17 +12,34 @@ const HoverDiv = ({ hoverDivRender, setHoverDivRender }) => {
   const [todoValue, setTodoValue] = useState("");
   const [selectedTag, setSelectedTag] = useState("red");
 
+  const todoInput = useRef();
+
   useEffect(() => {
     setTodoValue("");
     setSelectedTag("red");
+    todoInput.current.focus();
   }, [hoverDivRender]);
+
+  const handleTodoAdd = (todoValue, selectedTag) => {
+    const todoList = JSON.parse(localStorage.getItem("todoList")) ?? [];
+    const newTodo = {
+      id: new Date(),
+      content: todoValue,
+      tag: selectedTag,
+      done: false,
+    };
+    todoList.push(newTodo);
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!checkInputValidation(todoValue)) {
       alert("INVALID TODO INPUT");
+      todoInput.current.focus();
     } else {
       // success on submit
+      handleTodoAdd(todoValue, selectedTag);
       setHoverDivRender(false);
     }
   };
@@ -53,6 +70,7 @@ const HoverDiv = ({ hoverDivRender, setHoverDivRender }) => {
         placeholder="할 일을 입력하세요."
         value={todoValue || ""}
         onChange={handleTodoChange}
+        ref={todoInput}
       />
       <HoverTagDiv>
         <CircleBtn

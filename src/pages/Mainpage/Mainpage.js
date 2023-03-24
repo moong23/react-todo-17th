@@ -86,7 +86,7 @@ const Mainpage = ({ clickedIcon, setClickedIcon }) => {
         clickedIcon={clickedIcon}
       />
       <MainIcon
-        name="text"
+        name="readme.txt"
         position={textIconPosition}
         clickedIcon={clickedIcon}
       />
