@@ -15,13 +15,14 @@ const Mainpage = ({ clickedIcon, setClickedIcon }) => {
     top: 160,
     left: 30,
   });
+
   useEffect(() => {
     setMainIconPosition({
       top: 30,
       left: 30,
     });
     setTextIconPosition({
-      top: 30,
+      top: 160,
       left: 30,
     });
   }, []);
