@@ -32,7 +32,7 @@ const Todo = ({ id, content, tag, done, setAllList, allList }) => {
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [id]);
 
   const handleTodoClick = (e) => {
     const containerWidth = todoContainerDiv.current.offsetWidth;
@@ -67,6 +67,10 @@ const Todo = ({ id, content, tag, done, setAllList, allList }) => {
           setToggleLeft(true);
         }
         if (toggleLeft) {
+          let currentTodo = JSON.parse(localStorage.getItem("todoList"));
+          let targetData = currentTodo.filter((todo) => todo.id !== id);
+          localStorage.setItem("todoList", JSON.stringify(targetData));
+          setAllList(targetData);
         }
       } else if (clickPosition > containerWidth * 0.6) {
         if (toggleLeft) {
